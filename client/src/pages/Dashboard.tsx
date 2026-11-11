@@ -85,9 +85,6 @@ export const Dashboard: React.FC = () => {
           <p style={{ fontSize: '32px', fontWeight: 700, color: 'var(--success)', margin: '8px 0' }}>
             {stats.loading ? '...' : stats.postsCount}
           </p>
-          <p style={{ color: 'var(--text-muted)', fontSize: '14px', marginBottom: '16px' }}>
-            Public posts visible to everyone, retrieved via MongoDB $lookup.
-          </p>
           <div style={{ display: 'flex', gap: '8px' }}>
             <Link to="/posts" className="btn btn-secondary btn-sm">
               Explore Feed

@@ -14,7 +14,7 @@ export const Pagination: React.FC<PaginationProps> = ({ pagination, onPageChange
   return (
     <div className="pagination">
       <span>
-        Page {page} of {totalPages} ({total} total records)
+        Page {page} of {totalPages} ({total} total posts)
       </span>
       <div className="pagination-controls">
         <button

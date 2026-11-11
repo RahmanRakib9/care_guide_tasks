@@ -81,9 +81,6 @@ export const PostsList: React.FC = () => {
       <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '20px' }}>
         <div>
           <h2 style={{ fontSize: '22px', fontWeight: 700 }}>Public Posts Feed</h2>
-          <p style={{ color: 'var(--text-muted)', fontSize: '14px' }}>
-            Posts visible to everyone. Click an author to trigger MongoDB <code>$lookup</code> aggregation.
-          </p>
         </div>
         {isAuthenticated && (
           <button
@@ -143,21 +140,18 @@ export const PostsList: React.FC = () => {
         <div className="card" style={{ borderColor: '#38bdf8', backgroundColor: '#f0f9ff', marginBottom: '24px' }}>
           <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start' }}>
             <div>
-              <div style={{ display: 'inline-block', fontSize: '11px', fontWeight: 700, color: '#0369a1', textTransform: 'uppercase', marginBottom: '4px' }}>
-                MongoDB $lookup Pipeline Result
-              </div>
               <h3 style={{ fontSize: '18px', fontWeight: 700 }}>
                 {selectedUserLookup.name} ({selectedUserLookup.email})
               </h3>
               <p style={{ fontSize: '13px', color: 'var(--text-muted)' }}>
-                Total Posts Retrieved via $lookup: <strong>{selectedUserLookup.totalPosts}</strong>
+                Total Posts: <strong>{selectedUserLookup.totalPosts}</strong>
               </p>
             </div>
             <button
               onClick={() => setSelectedUserLookup(null)}
               className="btn btn-secondary btn-sm"
             >
-              Close Inspection
+              back to feed
             </button>
           </div>
 
@@ -228,7 +222,7 @@ export const PostsList: React.FC = () => {
                           style={{ fontSize: '11px', padding: '2px 6px' }}
                           title="Inspect user posts via $lookup pipeline"
                         >
-                          $lookup view
+                           view more
                         </button>
                       )}
                     </div>

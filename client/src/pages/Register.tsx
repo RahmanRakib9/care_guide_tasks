@@ -3,11 +3,13 @@ import { Link, useNavigate } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
 import { Alert } from '../components/Alert';
 
+const interestOptions = ['chess', 'reading', 'music', 'travel', 'sports'];
+
 export const Register: React.FC = () => {
   const [name, setName] = useState<string>('');
   const [email, setEmail] = useState<string>('');
   const [password, setPassword] = useState<string>('');
-  const [interestsInput, setInterestsInput] = useState<string>('');
+  const [interest, setInterest] = useState<string>('');
   const [error, setError] = useState<{ message: string; errors?: any[] } | null>(null);
   const [submitting, setSubmitting] = useState<boolean>(false);
 
@@ -19,13 +21,8 @@ export const Register: React.FC = () => {
     setError(null);
     setSubmitting(true);
 
-    const interests = interestsInput
-      .split(',')
-      .map((i) => i.trim())
-      .filter(Boolean);
-
     try {
-      await register({ name, email, password, interests });
+      await register({ name, email, password, interests: interest ? [interest] : [] });
       navigate('/dashboard');
     } catch (err: any) {
       const resData = err.response?.data;
@@ -90,15 +87,20 @@ export const Register: React.FC = () => {
           </div>
 
           <div className="form-group">
-            <label htmlFor="interests">Interests </label>
-            <input
-              id="interests"
-              type="text"
+            <label htmlFor="interest">Interest</label>
+            <select
+              id="interest"
               className="form-control"
-              value={interestsInput}
-              onChange={(e) => setInterestsInput(e.target.value)}
-              placeholder="coding, security, reading"
-            />
+              value={interest}
+              onChange={(e) => setInterest(e.target.value)}
+            >
+              <option value="">Select an interest</option>
+              {interestOptions.map((option) => (
+                <option key={option} value={option}>
+                  {option.charAt(0).toUpperCase() + option.slice(1)}
+                </option>
+              ))}
+            </select>
           </div>
 
           <button

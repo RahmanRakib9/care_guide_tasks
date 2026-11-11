@@ -1,6 +1,7 @@
 import mongoose, { Document, Model, Schema } from 'mongoose';
 import bcrypt from 'bcryptjs';
 import { ROLES, ROLE_VALUES, UserRole } from '../constants/roles';
+import { USER_INTERESTS_VALUES } from '../constants/interests';
 
 export interface IUser {
   name: string;
@@ -49,6 +50,10 @@ const userSchema = new Schema<IUserDocument, UserModel>(
     },
     interests: {
       type: [String],
+      enum: {
+        values: USER_INTERESTS_VALUES,
+        message: '{VALUE} is not a supported interest',
+      },
       default: []
     }
   },

@@ -90,7 +90,7 @@ export const Register: React.FC = () => {
           </div>
 
           <div className="form-group">
-            <label htmlFor="interests">Interests (comma separated)</label>
+            <label htmlFor="interests">Interests </label>
             <input
               id="interests"
               type="text"
@@ -99,9 +99,6 @@ export const Register: React.FC = () => {
               onChange={(e) => setInterestsInput(e.target.value)}
               placeholder="coding, security, reading"
             />
-            <small style={{ color: 'var(--text-muted)', fontSize: '12px' }}>
-              Used for interest-based aggregation in the database.
-            </small>
           </div>
 
           <button

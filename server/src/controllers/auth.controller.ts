@@ -1,6 +1,6 @@
 import { Request, Response, NextFunction } from 'express';
-import * as authService from '../services/auth.service';
-import { sendResponse } from '../utils/apiResponse';
+import * as authService from '../services/auth.service.js';
+import { sendResponse } from '../utils/apiResponse.js';
 
 export const register = async (req: Request, res: Response, next: NextFunction): Promise<void> => {
   try {

@@ -1,11 +1,11 @@
 import { Router } from 'express';
-import * as postController from '../controllers/post.controller';
-import { authenticate } from '../middlewares/auth.middleware';
-import { authorize } from '../middlewares/rbac.middleware';
-import { validateRequest } from '../middlewares/validate.middleware';
-import { createPostSchema } from '../validators/post.validator';
-import { userIdParamSchema, paginationQuerySchema } from '../validators/common.validator';
-import { ROLES } from '../constants/roles';
+import * as postController from '../controllers/post.controller.js';
+import { authenticate } from '../middlewares/auth.middleware.js';
+import { authorize } from '../middlewares/rbac.middleware.js';
+import { validateRequest } from '../middlewares/validate.middleware.js';
+import { createPostSchema } from '../validators/post.validator.js';
+import { userIdParamSchema, paginationQuerySchema } from '../validators/common.validator.js';
+import { ROLES } from '../constants/roles.js';
 
 const router = Router();
 

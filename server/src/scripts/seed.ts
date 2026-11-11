@@ -1,8 +1,8 @@
 // Seed script: creates a single admin user from .env values.
 import path from 'node:path';
-import { connectDB, disconnectDB } from '../config/db';
-import { User } from '../models/user.model';
-import { ROLES } from '../constants/roles';
+import { connectDB, disconnectDB } from '../config/db.js';
+import { User } from '../models/user.model.js';
+import { ROLES } from '../constants/roles.js';
 
 export const seedDatabase = async (): Promise<void> => {
   const adminName = process.env.ADMIN_NAME || 'Admin';

@@ -1,11 +1,11 @@
 import { Router } from 'express';
-import * as userController from '../controllers/user.controller';
-import { authenticate } from '../middlewares/auth.middleware';
-import { authorize } from '../middlewares/rbac.middleware';
-import { validateRequest } from '../middlewares/validate.middleware';
-import { createUserSchema, updateUserSchema } from '../validators/user.validator';
-import { idParamSchema, paginationQuerySchema } from '../validators/common.validator';
-import { ROLES } from '../constants/roles';
+import * as userController from '../controllers/user.controller.js';
+import { authenticate } from '../middlewares/auth.middleware.js';
+import { authorize } from '../middlewares/rbac.middleware.js';
+import { validateRequest } from '../middlewares/validate.middleware.js';
+import { createUserSchema, updateUserSchema } from '../validators/user.validator.js';
+import { idParamSchema, paginationQuerySchema } from '../validators/common.validator.js';
+import { ROLES } from '../constants/roles.js';
 
 const router = Router();
 

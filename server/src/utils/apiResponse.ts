@@ -1,5 +1,5 @@
 import { Response } from 'express';
-import { PaginationMeta } from './pagination';
+import { PaginationMeta } from './pagination.js';
 
 export interface ApiResponsePayload<T = any> {
   success: boolean;

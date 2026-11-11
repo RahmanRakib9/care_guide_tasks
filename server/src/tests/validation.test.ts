@@ -1,6 +1,6 @@
 import { describe, it, expect, beforeEach } from 'vitest';
 import request from 'supertest';
-import app from '../app';
+import app from '../app.js';
 
 describe('Zod Validation Middleware & Boundary Conditions', () => {
   let userToken: string;

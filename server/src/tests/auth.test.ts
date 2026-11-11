@@ -1,8 +1,8 @@
 import { describe, it, expect } from 'vitest';
 import request from 'supertest';
-import app from '../app';
-import { User } from '../models/user.model';
-import { ROLES } from '../constants/roles';
+import app from '../app.js';
+import { User } from '../models/user.model.js';
+import { ROLES } from '../constants/roles.js';
 
 describe('Authentication & Profile Endpoints', () => {
   const testUser = {

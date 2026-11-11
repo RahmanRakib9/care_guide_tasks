@@ -1,8 +1,8 @@
-import { Note, INoteDocument } from '../models/note.model';
-import { IUserDocument } from '../models/user.model';
-import { ApiError } from '../utils/apiError';
-import { ROLES } from '../constants/roles';
-import { CreateNoteInput, UpdateNoteInput } from '../validators/note.validator';
+import { Note, INoteDocument } from '../models/note.model.js';
+import { IUserDocument } from '../models/user.model.js';
+import { ApiError } from '../utils/apiError.js';
+import { ROLES } from '../constants/roles.js';
+import { CreateNoteInput, UpdateNoteInput } from '../validators/note.validator.js';
 
 export const createNote = async (
   input: CreateNoteInput & { userId: any }

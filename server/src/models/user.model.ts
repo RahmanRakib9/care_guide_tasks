@@ -1,7 +1,7 @@
 import mongoose, { Document, Model, Schema } from 'mongoose';
 import bcrypt from 'bcryptjs';
-import { ROLES, ROLE_VALUES, UserRole } from '../constants/roles';
-import { USER_INTERESTS_VALUES } from '../constants/interests';
+import { ROLES, ROLE_VALUES, UserRole } from '../constants/roles.js';
+import { USER_INTERESTS_VALUES } from '../constants/interests.js';
 
 export interface IUser {
   name: string;

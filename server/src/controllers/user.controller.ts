@@ -1,7 +1,7 @@
 import { Request, Response, NextFunction } from 'express';
-import * as userService from '../services/user.service';
-import { sendResponse } from '../utils/apiResponse';
-import { getPaginationParams, formatPaginationMeta } from '../utils/pagination';
+import * as userService from '../services/user.service.js';
+import { sendResponse } from '../utils/apiResponse.js';
+import { getPaginationParams, formatPaginationMeta } from '../utils/pagination.js';
 
 export const createUser = async (req: Request, res: Response, next: NextFunction): Promise<void> => {
   try {

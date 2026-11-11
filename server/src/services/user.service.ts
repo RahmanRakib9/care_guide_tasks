@@ -1,7 +1,7 @@
-import { User, IUserDocument } from '../models/user.model';
-import { ApiError } from '../utils/apiError';
-import { ROLES } from '../constants/roles';
-import { CreateUserInput, UpdateUserInput } from '../validators/user.validator';
+import { User, IUserDocument } from '../models/user.model.js';
+import { ApiError } from '../utils/apiError.js';
+import { ROLES } from '../constants/roles.js';
+import { CreateUserInput, UpdateUserInput } from '../validators/user.validator.js';
 
 export const createUser = async (input: CreateUserInput): Promise<IUserDocument> => {
   const existingUser = await User.findOne({ email: input.email });

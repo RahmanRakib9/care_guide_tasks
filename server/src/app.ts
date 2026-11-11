@@ -1,14 +1,14 @@
 import express, { Application } from 'express';
-import helmet from 'helmet';
+import mongoose from 'mongoose';
 import cors from 'cors';
-import routes from './routes/index';
-import { apiLimiter } from './middlewares/rateLimit.middleware';
-import { notFoundHandler, errorHandler } from './middlewares/error.middleware';
-import { config } from './config/env';
+import routes from './routes/index.js';
+import { apiLimiter } from './middlewares/rateLimit.middleware.js';
+import { notFoundHandler, errorHandler } from './middlewares/error.middleware.js';
+import { config } from './config/env.js';
+import { connectDB } from './config/db.js';
 
 const app: Application = express();
-
-app.use(helmet());
+let databaseConnection: ReturnType<typeof connectDB> | null = null;
 
 app.use(
   cors({
@@ -23,6 +23,22 @@ app.use(express.json({ limit: '1mb' }));
 app.use(express.urlencoded({ extended: true, limit: '1mb' }));
 
 app.use('/api', apiLimiter);
+app.use('/api', async (_req, _res, next) => {
+  try {
+    if (mongoose.connection.readyState !== 1) {
+      if (!databaseConnection) {
+        databaseConnection = connectDB().catch((error: unknown) => {
+          databaseConnection = null;
+          throw error;
+        });
+      }
+      await databaseConnection;
+    }
+    next();
+  } catch (error) {
+    next(error);
+  }
+});
 app.use('/api', routes);
 
 app.use(notFoundHandler);

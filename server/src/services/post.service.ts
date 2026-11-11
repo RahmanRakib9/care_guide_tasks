@@ -1,8 +1,8 @@
 import mongoose from 'mongoose';
-import { Post, IPostDocument } from '../models/post.model';
-import { User } from '../models/user.model';
-import { ApiError } from '../utils/apiError';
-import { CreatePostInput } from '../validators/post.validator';
+import { Post, IPostDocument } from '../models/post.model.js';
+import { User } from '../models/user.model.js';
+import { ApiError } from '../utils/apiError.js';
+import { CreatePostInput } from '../validators/post.validator.js';
 
 export const createPost = async (
   input: CreatePostInput & { userId: any }

@@ -1,5 +1,5 @@
 import { Request, Response, NextFunction } from 'express';
-import { ApiError } from '../utils/apiError';
+import { ApiError } from '../utils/apiError.js';
 
 export const authorize = (...allowedRoles: string[]) => {
   return (req: Request, _res: Response, next: NextFunction): void => {

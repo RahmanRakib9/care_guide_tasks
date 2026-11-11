@@ -1,10 +1,10 @@
 import { describe, it, expect, beforeEach } from 'vitest';
 import request from 'supertest';
-import app from '../app';
-import { User } from '../models/user.model';
-import { Note } from '../models/note.model';
-import { Post } from '../models/post.model';
-import { ROLES } from '../constants/roles';
+import app from '../app.js';
+import { User } from '../models/user.model.js';
+import { Note } from '../models/note.model.js';
+import { Post } from '../models/post.model.js';
+import { ROLES } from '../constants/roles.js';
 
 describe('Admin User Management & RBAC Protection', () => {
   let adminToken: string;

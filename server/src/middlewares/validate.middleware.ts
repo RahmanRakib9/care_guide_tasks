@@ -1,6 +1,6 @@
 import { Request, Response, NextFunction } from 'express';
 import { ZodError, ZodTypeAny } from 'zod';
-import { ApiError } from '../utils/apiError';
+import { ApiError } from '../utils/apiError.js';
 
 export interface ValidationSchemas {
   body?: ZodTypeAny;

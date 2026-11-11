@@ -1,5 +1,5 @@
 import mongoose, { Mongoose } from 'mongoose';
-import { config } from './env';
+import { config } from './env.js';
 
 let memoryServerInstance: any = null;
 

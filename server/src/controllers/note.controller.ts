@@ -1,7 +1,7 @@
 import { Request, Response, NextFunction } from 'express';
-import * as noteService from '../services/note.service';
-import { sendResponse } from '../utils/apiResponse';
-import { getPaginationParams, formatPaginationMeta } from '../utils/pagination';
+import * as noteService from '../services/note.service.js';
+import { sendResponse } from '../utils/apiResponse.js';
+import { getPaginationParams, formatPaginationMeta } from '../utils/pagination.js';
 
 export const createNote = async (req: Request, res: Response, next: NextFunction): Promise<void> => {
   try {

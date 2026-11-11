@@ -1,9 +1,9 @@
 import jwt, { SignOptions } from 'jsonwebtoken';
-import { User, IUserDocument } from '../models/user.model';
-import { ApiError } from '../utils/apiError';
-import { config } from '../config/env';
-import { ROLES } from '../constants/roles';
-import { RegisterInput, LoginInput } from '../validators/auth.validator';
+import { User, IUserDocument } from '../models/user.model.js';
+import { ApiError } from '../utils/apiError.js';
+import { config } from '../config/env.js';
+import { ROLES } from '../constants/roles.js';
+import { RegisterInput, LoginInput } from '../validators/auth.validator.js';
 
 export const generateToken = (user: IUserDocument): string => {
   const options: SignOptions = {

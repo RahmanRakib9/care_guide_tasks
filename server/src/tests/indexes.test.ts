@@ -1,8 +1,8 @@
 import { describe, it, expect, beforeAll } from 'vitest';
 import mongoose from 'mongoose';
-import { User } from '../models/user.model';
-import { Note } from '../models/note.model';
-import { Post } from '../models/post.model';
+import { User } from '../models/user.model.js';
+import { Note } from '../models/note.model.js';
+import { Post } from '../models/post.model.js';
 
 describe('MongoDB Explicit Indexing Verification', () => {
   beforeAll(async () => {

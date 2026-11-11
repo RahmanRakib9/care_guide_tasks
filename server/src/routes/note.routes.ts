@@ -1,11 +1,11 @@
 import { Router } from 'express';
-import * as noteController from '../controllers/note.controller';
-import { authenticate } from '../middlewares/auth.middleware';
-import { authorize } from '../middlewares/rbac.middleware';
-import { validateRequest } from '../middlewares/validate.middleware';
-import { createNoteSchema, updateNoteSchema } from '../validators/note.validator';
-import { idParamSchema, paginationQuerySchema } from '../validators/common.validator';
-import { ROLES } from '../constants/roles';
+import * as noteController from '../controllers/note.controller.js';
+import { authenticate } from '../middlewares/auth.middleware.js';
+import { authorize } from '../middlewares/rbac.middleware.js';
+import { validateRequest } from '../middlewares/validate.middleware.js';
+import { createNoteSchema, updateNoteSchema } from '../validators/note.validator.js';
+import { idParamSchema, paginationQuerySchema } from '../validators/common.validator.js';
+import { ROLES } from '../constants/roles.js';
 
 const router = Router();
 

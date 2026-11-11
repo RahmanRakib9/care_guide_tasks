@@ -1,8 +1,8 @@
-import app from './app';
-import { connectDB, disconnectDB } from './config/db';
-import { config } from './config/env';
-import { User } from './models/user.model';
-import { seedDatabase } from './scripts/seed';
+import app from './app.js';
+import { connectDB, disconnectDB } from './config/db.js';
+import { config } from './config/env.js';
+import { User } from './models/user.model.js';
+import { seedDatabase } from './scripts/seed.js';
 
 const startServer = async (): Promise<void> => {
   try {

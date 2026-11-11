@@ -1,10 +1,10 @@
 import { describe, it, expect, beforeEach } from 'vitest';
 import request from 'supertest';
 import mongoose from 'mongoose';
-import app from '../app';
-import { User } from '../models/user.model';
-import { Post } from '../models/post.model';
-import { ROLES } from '../constants/roles';
+import app from '../app.js';
+import { User } from '../models/user.model.js';
+import { Post } from '../models/post.model.js';
+import { ROLES } from '../constants/roles.js';
 
 describe('Critical Aggregation Scenarios', () => {
   let adminToken: string;

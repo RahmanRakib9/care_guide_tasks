@@ -34,19 +34,8 @@ export const AdminInterests: React.FC = () => {
     <div>
       <div style={{ marginBottom: '20px' }}>
         <h2 style={{ fontSize: '22px', fontWeight: 700 }}>Users Grouped by Interests</h2>
-        <p style={{ color: 'var(--text-muted)', fontSize: '14px' }}>
-          Visualizing MongoDB Aggregation Scenario 1: Executed via a single <code>collection.aggregate()</code> pipeline.
-        </p>
       </div>
 
-      <div className="card" style={{ backgroundColor: '#f0fdf4', borderColor: '#86efac', marginBottom: '20px' }}>
-        <h4 style={{ fontSize: '14px', fontWeight: 600, color: '#166534', marginBottom: '4px' }}>
-          Aggregation Architecture Note
-        </h4>
-        <p style={{ fontSize: '13px', color: '#14532d' }}>
-          This data is generated on MongoDB using <code>$match</code> &rarr; <code>$unwind</code> &rarr; <code>$group</code> &rarr; <code>$sort</code> &rarr; <code>$project</code> &rarr; <code>$facet</code> in <strong>exactly ONE database aggregation call</strong>. Zero in-memory JS grouping or secondary queries are used.
-        </p>
-      </div>
 
       {error && <Alert type="danger" message={error} />}
 

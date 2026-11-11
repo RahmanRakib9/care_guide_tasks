@@ -23,13 +23,12 @@ export const Navbar: React.FC = () => {
         {isAuthenticated ? (
           <>
             <NavLink to="/dashboard">Dashboard</NavLink>
-            <NavLink to="/notes">My Notes</NavLink>
+            {!isAdmin && <NavLink to="/notes">My Notes</NavLink>}
 
             {isAdmin && (
               <>
                 <NavLink to="/admin/users">Users</NavLink>
                 <NavLink to="/admin/notes">All Notes</NavLink>
-                <NavLink to="/admin/interests">Interests (Agg)</NavLink>
               </>
             )}
 

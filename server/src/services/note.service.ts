@@ -52,9 +52,10 @@ export const getNoteById = async ({
     throw new ApiError(404, 'Note not found');
   }
 
-  const noteOwnerId = (note.userId as any)._id
-    ? (note.userId as any)._id.toString()
-    : (note.userId as any).toString();
+  const noteOwner = note.userId as any;
+  const noteOwnerId = noteOwner?._id
+    ? noteOwner._id.toString()
+    : noteOwner?.toString();
 
   if (user.role !== ROLES.ADMIN && noteOwnerId !== user._id.toString()) {
     throw new ApiError(403, 'Forbidden: You do not have permission to view this note');
@@ -77,7 +78,11 @@ export const updateNote = async ({
     throw new ApiError(404, 'Note not found');
   }
 
-  if (user.role !== ROLES.ADMIN && note.userId.toString() !== user._id.toString()) {
+  if (user.role === ROLES.ADMIN) {
+    throw new ApiError(403, 'Administrators can only view notes');
+  }
+
+  if (note.userId.toString() !== user._id.toString()) {
     throw new ApiError(403, 'Forbidden: You do not have permission to modify this note');
   }
 
@@ -100,7 +105,11 @@ export const deleteNote = async ({
     throw new ApiError(404, 'Note not found');
   }
 
-  if (user.role !== ROLES.ADMIN && note.userId.toString() !== user._id.toString()) {
+  if (user.role === ROLES.ADMIN) {
+    throw new ApiError(403, 'Administrators can only view notes');
+  }
+
+  if (note.userId.toString() !== user._id.toString()) {
     throw new ApiError(403, 'Forbidden: You do not have permission to delete this note');
   }
 

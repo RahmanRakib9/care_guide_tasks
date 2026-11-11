@@ -10,7 +10,6 @@ export const AdminNotes: React.FC = () => {
   const [page, setPage] = useState<number>(1);
   const [loading, setLoading] = useState<boolean>(true);
   const [error, setError] = useState<string | null>(null);
-  const [actionMessage, setActionMessage] = useState<string | null>(null);
 
   const fetchAllNotes = async (pageNum = 1): Promise<void> => {
     setLoading(true);
@@ -31,19 +30,6 @@ export const AdminNotes: React.FC = () => {
     fetchAllNotes(page);
   }, [page]);
 
-  const handleDelete = async (id: string, title: string): Promise<void> => {
-    if (!window.confirm(`Are you sure you want to delete note "${title}"?`)) return;
-
-    try {
-      await api.delete(`/notes/${id}`);
-      setActionMessage('Note deleted successfully by Admin');
-      setTimeout(() => setActionMessage(null), 3000);
-      fetchAllNotes(page);
-    } catch (err: any) {
-      setError(err.response?.data?.message || 'Failed to delete note');
-    }
-  };
-
   return (
     <div>
       <div style={{ marginBottom: '20px' }}>
@@ -53,7 +39,6 @@ export const AdminNotes: React.FC = () => {
         </p>
       </div>
 
-      {actionMessage && <Alert type="success" message={actionMessage} />}
       {error && <Alert type="danger" message={error} />}
 
       {loading ? (
@@ -90,14 +75,6 @@ export const AdminNotes: React.FC = () => {
                       <div style={{ marginTop: '2px' }}>
                         Created: {new Date(note.createdAt).toLocaleDateString()}
                       </div>
-                    </div>
-                    <div style={{ display: 'flex', justifyContent: 'flex-end' }}>
-                      <button
-                        onClick={() => handleDelete(note._id, note.title)}
-                        className="btn btn-danger btn-sm"
-                      >
-                        Delete Note
-                      </button>
                     </div>
                   </div>
                 </div>

@@ -38,8 +38,7 @@ export const updateUser = async (req: Request, res: Response, next: NextFunction
     const id = Array.isArray(req.params.id) ? req.params.id[0] : req.params.id;
     const user = await userService.updateUser({
       id,
-      updateData: req.body,
-      currentAdminUser: req.user!
+      updateData: req.body
     });
     sendResponse(res, 200, 'User updated successfully', { user });
   } catch (error) {

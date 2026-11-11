@@ -9,7 +9,7 @@ describe('Authentication & Profile Endpoints', () => {
     name: 'Test User',
     email: 'test@example.com',
     password: 'Password123!',
-    interests: ['coding', 'security']
+    interests: ['chess', 'reading']
   };
 
   it('POST /api/auth/register should successfully register a new user', async () => {

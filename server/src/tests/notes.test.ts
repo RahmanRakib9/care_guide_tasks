@@ -164,7 +164,7 @@ describe('Notes CRUD and RBAC', () => {
     expect(checkRes.status).toBe(404);
   });
 
-  it('Admin can view, update, and delete any user note', async () => {
+  it('Admin can view but cannot update or delete any user note', async () => {
     const userNote = await Note.create({
       title: 'User Note',
       content: 'User Content',
@@ -180,13 +180,15 @@ describe('Notes CRUD and RBAC', () => {
       .patch(`/api/notes/${userNote._id}`)
       .set('Authorization', `Bearer ${adminToken}`)
       .send({ title: 'Admin Modified' });
-    expect(updateRes.status).toBe(200);
-    expect(updateRes.body.data.note.title).toBe('Admin Modified');
+    expect(updateRes.status).toBe(403);
 
     const deleteRes = await request(app)
       .delete(`/api/notes/${userNote._id}`)
       .set('Authorization', `Bearer ${adminToken}`);
-    expect(deleteRes.status).toBe(200);
+    expect(deleteRes.status).toBe(403);
+
+    const unchangedNote = await Note.findById(userNote._id);
+    expect(unchangedNote?.title).toBe('User Note');
   });
 
   it('GET /api/notes supports pagination with page and limit parameters', async () => {

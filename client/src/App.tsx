@@ -11,11 +11,10 @@ import { NoteForm } from './pages/NoteForm';
 import { PostsList } from './pages/PostsList';
 import { AdminUsers } from './pages/AdminUsers';
 import { AdminNotes } from './pages/AdminNotes';
-import { AdminInterests } from './pages/AdminInterests';
 import { useAuth } from './context/AuthContext';
 
 export const App: React.FC = () => {
-  const { isAuthenticated } = useAuth();
+  const { isAuthenticated, isAdmin } = useAuth();
 
   return (
     <div className="app-container">
@@ -38,25 +37,37 @@ export const App: React.FC = () => {
           <Route
             path="/notes"
             element={
-              <ProtectedRoute>
-                <NotesList />
-              </ProtectedRoute>
+              isAdmin ? (
+                <Navigate to="/admin/notes" replace />
+              ) : (
+                <ProtectedRoute>
+                  <NotesList />
+                </ProtectedRoute>
+              )
             }
           />
           <Route
             path="/notes/new"
             element={
-              <ProtectedRoute>
-                <NoteForm />
-              </ProtectedRoute>
+              isAdmin ? (
+                <Navigate to="/admin/notes" replace />
+              ) : (
+                <ProtectedRoute>
+                  <NoteForm />
+                </ProtectedRoute>
+              )
             }
           />
           <Route
             path="/notes/:id/edit"
             element={
-              <ProtectedRoute>
-                <NoteForm />
-              </ProtectedRoute>
+              isAdmin ? (
+                <Navigate to="/admin/notes" replace />
+              ) : (
+                <ProtectedRoute>
+                  <NoteForm />
+                </ProtectedRoute>
+              )
             }
           />
 
@@ -76,15 +87,6 @@ export const App: React.FC = () => {
               </AdminRoute>
             }
           />
-          <Route
-            path="/admin/interests"
-            element={
-              <AdminRoute>
-                <AdminInterests />
-              </AdminRoute>
-            }
-          />
-
           <Route path="*" element={<Navigate to="/" replace />} />
         </Routes>
       </main>

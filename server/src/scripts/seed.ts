@@ -1,36 +1,36 @@
 // Seed script: creates a single admin user from .env values.
-import bcrypt from 'bcryptjs';
+import path from 'node:path';
 import { connectDB, disconnectDB } from '../config/db';
 import { User } from '../models/user.model';
 import { ROLES } from '../constants/roles';
-import dotenv from 'dotenv';
-
-dotenv.config(); // load ADMIN_NAME, ADMIN_EMAIL, ADMIN_PASSWORD
 
 export const seedDatabase = async (): Promise<void> => {
-  console.log('[Seed] Cleaning up existing users for idempotent admin seed...');
-  await User.deleteMany({});
-
   const adminName = process.env.ADMIN_NAME || 'Admin';
-  const adminEmail = process.env.ADMIN_EMAIL || 'admin@example.com';
+  const adminEmail = (process.env.ADMIN_EMAIL || 'admin@example.com').trim().toLowerCase();
   const adminPasswordPlain = process.env.ADMIN_PASSWORD || 'Password123!';
 
-  const salt = await bcrypt.genSalt(10);
-  const hashedPassword = await bcrypt.hash(adminPasswordPlain, salt);
+  const existingAdmin = await User.findOne({ email: adminEmail }).select('+password');
+  if (existingAdmin) {
+    existingAdmin.name = adminName;
+    existingAdmin.password = adminPasswordPlain;
+    existingAdmin.role = ROLES.ADMIN;
+    existingAdmin.interests = [];
+    await existingAdmin.save();
+    console.log('[Seed] Admin user updated:', adminEmail);
+    return;
+  }
 
-  const adminUser = new User({
+  await User.create({
     name: adminName,
     email: adminEmail,
-    password: hashedPassword,
+    password: adminPasswordPlain,
     role: ROLES.ADMIN,
     interests: []
   });
-
-  await adminUser.save();
   console.log('[Seed] Admin user created:', adminEmail);
 };
 
-if (process.argv[1]?.replace(/\\\\/g, '/').includes('src/scripts/seed')) {
+if (path.basename(process.argv[1] || '').startsWith('seed.')) {
   (async () => {
     try {
       await connectDB();

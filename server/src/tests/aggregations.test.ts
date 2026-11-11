@@ -19,7 +19,7 @@ describe('Critical Aggregation Scenarios', () => {
       email: 'admin@example.com',
       password: 'Password123!',
       role: ROLES.ADMIN,
-      interests: ['management', 'security']
+      interests: ['travel']
     });
 
     const adminLogin = await request(app).post('/api/auth/login').send({
@@ -33,7 +33,7 @@ describe('Critical Aggregation Scenarios', () => {
       email: 'alice@example.com',
       password: 'Password123!',
       role: ROLES.USER,
-      interests: ['coding', 'music']
+      interests: ['chess', 'music']
     });
 
     user2 = await User.create({
@@ -41,7 +41,7 @@ describe('Critical Aggregation Scenarios', () => {
       email: 'bob@example.com',
       password: 'Password123!',
       role: ROLES.USER,
-      interests: ['coding', 'reading']
+      interests: ['chess', 'reading']
     });
 
     user3 = await User.create({
@@ -71,12 +71,12 @@ describe('Critical Aggregation Scenarios', () => {
       const groups = res.body.data.groups;
       expect(Array.isArray(groups)).toBe(true);
 
-      const codingGroup = groups.find((g: any) => g.interest === 'coding');
-      expect(codingGroup).toBeDefined();
-      expect(codingGroup.totalUsers).toBe(2);
-      const codingUserNames = codingGroup.users.map((u: any) => u.name);
-      expect(codingUserNames).toContain('Alice');
-      expect(codingUserNames).toContain('Bob');
+      const chessGroup = groups.find((g: any) => g.interest === 'chess');
+      expect(chessGroup).toBeDefined();
+      expect(chessGroup.totalUsers).toBe(2);
+      const chessUserNames = chessGroup.users.map((u: any) => u.name);
+      expect(chessUserNames).toContain('Alice');
+      expect(chessUserNames).toContain('Bob');
 
       const musicGroup = groups.find((g: any) => g.interest === 'music');
       expect(musicGroup).toBeDefined();

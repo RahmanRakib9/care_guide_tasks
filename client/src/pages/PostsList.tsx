@@ -6,7 +6,7 @@ import { Alert } from '../components/Alert';
 import { Post, PaginationMeta, UserWithPosts } from '../types';
 
 export const PostsList: React.FC = () => {
-  const { isAuthenticated } = useAuth();
+  const { isAuthenticated, isAdmin } = useAuth();
   const [posts, setPosts] = useState<Post[]>([]);
   const [pagination, setPagination] = useState<PaginationMeta | null>(null);
   const [page, setPage] = useState<number>(1);
@@ -82,7 +82,7 @@ export const PostsList: React.FC = () => {
         <div>
           <h2 style={{ fontSize: '22px', fontWeight: 700 }}>Public Posts Feed</h2>
         </div>
-        {isAuthenticated && (
+        {isAuthenticated && !isAdmin && (
           <button
             onClick={() => setShowCreateModal((prev) => !prev)}
             className="btn btn-primary"

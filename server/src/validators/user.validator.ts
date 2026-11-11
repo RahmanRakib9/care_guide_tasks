@@ -1,5 +1,4 @@
 import { z } from 'zod';
-import { ROLE_VALUES } from '../constants/roles';
 
 export const createUserSchema = z.object({
   name: z
@@ -16,9 +15,8 @@ export const createUserSchema = z.object({
     .string({ required_error: 'Password is required' })
     .min(6, 'Password must be at least 6 characters')
     .max(100, 'Password cannot exceed 100 characters'),
-  role: z.enum(ROLE_VALUES as [string, ...string[]]).optional(),
   interests: z.array(z.string().trim().min(1)).optional().default([])
-});
+}).strict();
 
 export const updateUserSchema = z
   .object({
@@ -39,15 +37,14 @@ export const updateUserSchema = z
       .min(6, 'Password must be at least 6 characters')
       .max(100, 'Password cannot exceed 100 characters')
       .optional(),
-    role: z.enum(ROLE_VALUES as [string, ...string[]]).optional(),
     interests: z.array(z.string().trim().min(1)).optional()
   })
+  .strict()
   .refine(
     (data) =>
       data.name !== undefined ||
       data.email !== undefined ||
       data.password !== undefined ||
-      data.role !== undefined ||
       data.interests !== undefined,
     {
       message: 'At least one field must be provided for update'

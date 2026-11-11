@@ -29,10 +29,10 @@ export const Dashboard: React.FC = () => {
       }
     };
 
-    if (user?._id) {
+    if (user?._id && !isAdmin) {
       fetchStats();
     }
-  }, [user]);
+  }, [user, isAdmin]);
 
   return (
     <div>
@@ -61,37 +61,39 @@ export const Dashboard: React.FC = () => {
         </div>
       </div>
 
-      <div className="grid-2">
-        <div className="card">
-          <h3 className="card-title">My Notes</h3>
-          <p style={{ fontSize: '32px', fontWeight: 700, color: 'var(--primary)', margin: '8px 0' }}>
-            {stats.loading ? '...' : stats.notesCount}
-          </p>
-          <p style={{ color: 'var(--text-muted)', fontSize: '14px', marginBottom: '16px' }}>
-            Private notes accessible only by you (and administrators).
-          </p>
-          <div style={{ display: 'flex', gap: '8px' }}>
-            <Link to="/notes" className="btn btn-secondary btn-sm">
-              View All Notes
-            </Link>
-            <Link to="/notes/new" className="btn btn-primary btn-sm">
-              + New Note
-            </Link>
+      {!isAdmin && (
+        <div className="grid-2">
+          <div className="card">
+            <h3 className="card-title">My Notes</h3>
+            <p style={{ fontSize: '32px', fontWeight: 700, color: 'var(--primary)', margin: '8px 0' }}>
+              {stats.loading ? '...' : stats.notesCount}
+            </p>
+            <p style={{ color: 'var(--text-muted)', fontSize: '14px', marginBottom: '16px' }}>
+              Your private notes.
+            </p>
+            <div style={{ display: 'flex', gap: '8px' }}>
+              <Link to="/notes" className="btn btn-secondary btn-sm">
+                View All Notes
+              </Link>
+              <Link to="/notes/new" className="btn btn-primary btn-sm">
+                + New Note
+              </Link>
+            </div>
           </div>
-        </div>
 
-        <div className="card">
-          <h3 className="card-title">My Public Posts</h3>
-          <p style={{ fontSize: '32px', fontWeight: 700, color: 'var(--success)', margin: '8px 0' }}>
-            {stats.loading ? '...' : stats.postsCount}
-          </p>
-          <div style={{ display: 'flex', gap: '8px' }}>
-            <Link to="/posts" className="btn btn-secondary btn-sm">
-              Explore Feed
-            </Link>
+          <div className="card">
+            <h3 className="card-title">My Public Posts</h3>
+            <p style={{ fontSize: '32px', fontWeight: 700, color: 'var(--success)', margin: '8px 0' }}>
+              {stats.loading ? '...' : stats.postsCount}
+            </p>
+            <div style={{ display: 'flex', gap: '8px' }}>
+              <Link to="/posts" className="btn btn-secondary btn-sm">
+                Explore Feed
+              </Link>
+            </div>
           </div>
         </div>
-      </div>
+      )}
 
       {isAdmin && (
         <div className="card" style={{ borderColor: '#fca5a5', backgroundColor: '#fff5f5' }}>
@@ -99,8 +101,7 @@ export const Dashboard: React.FC = () => {
             Admin Management Console
           </h3>
           <p style={{ color: '#7f1d1d', fontSize: '14px', marginBottom: '16px' }}>
-            You have administrator privileges. You can manage all system users, inspect all notes, and view
-            the required aggregation views.
+            Manage user accounts and view users' notes and public posts.
           </p>
           <div style={{ display: 'flex', gap: '8px', flexWrap: 'wrap' }}>
             <Link to="/admin/users" className="btn btn-secondary btn-sm">
@@ -109,8 +110,8 @@ export const Dashboard: React.FC = () => {
             <Link to="/admin/notes" className="btn btn-secondary btn-sm">
               View All Notes
             </Link>
-            <Link to="/admin/interests" className="btn btn-secondary btn-sm">
-              Interests Aggregation View
+            <Link to="/posts" className="btn btn-secondary btn-sm">
+              View Public Posts
             </Link>
           </div>
         </div>
